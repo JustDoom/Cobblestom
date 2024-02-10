@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.imjustdoom</groupId>
+    <artifactId>MinestomTest</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.hollow-cube</groupId>
+            <artifactId>minestom-ce</artifactId>
+            <version>78cb62fa72906907aa29d6523095967ccc0bf4ae</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ALS-Project</groupId>
+            <artifactId>Minestom-States</artifactId>
+            <version>06c7687</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ALS-Project</groupId>
+            <artifactId>Minestom-Utilities</artifactId>
+            <version>01c3fd6fa3</version>
+        </dependency>
+    </dependencies>
+</project>

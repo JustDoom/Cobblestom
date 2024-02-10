@@ -1,0 +1,166 @@
+{
+  "minecraft:base": {
+    "id": 0,
+    "identifier": "b"
+  },
+  "minecraft:square_bottom_left": {
+    "id": 1,
+    "identifier": "bl"
+  },
+  "minecraft:square_bottom_right": {
+    "id": 2,
+    "identifier": "br"
+  },
+  "minecraft:square_top_left": {
+    "id": 3,
+    "identifier": "tl"
+  },
+  "minecraft:square_top_right": {
+    "id": 4,
+    "identifier": "tr"
+  },
+  "minecraft:stripe_bottom": {
+    "id": 5,
+    "identifier": "bs"
+  },
+  "minecraft:stripe_top": {
+    "id": 6,
+    "identifier": "ts"
+  },
+  "minecraft:stripe_left": {
+    "id": 7,
+    "identifier": "ls"
+  },
+  "minecraft:stripe_right": {
+    "id": 8,
+    "identifier": "rs"
+  },
+  "minecraft:stripe_center": {
+    "id": 9,
+    "identifier": "cs"
+  },
+  "minecraft:stripe_middle": {
+    "id": 10,
+    "identifier": "ms"
+  },
+  "minecraft:stripe_downright": {
+    "id": 11,
+    "identifier": "drs"
+  },
+  "minecraft:stripe_downleft": {
+    "id": 12,
+    "identifier": "dls"
+  },
+  "minecraft:small_stripes": {
+    "id": 13,
+    "identifier": "ss"
+  },
+  "minecraft:cross": {
+    "id": 14,
+    "identifier": "cr"
+  },
+  "minecraft:straight_cross": {
+    "id": 15,
+    "identifier": "sc"
+  },
+  "minecraft:triangle_bottom": {
+    "id": 16,
+    "identifier": "bt"
+  },
+  "minecraft:triangle_top": {
+    "id": 17,
+    "identifier": "tt"
+  },
+  "minecraft:triangles_bottom": {
+    "id": 18,
+    "identifier": "bts"
+  },
+  "minecraft:triangles_top": {
+    "id": 19,
+    "identifier": "tts"
+  },
+  "minecraft:diagonal_left": {
+    "id": 20,
+    "identifier": "ld"
+  },
+  "minecraft:diagonal_up_right": {
+    "id": 21,
+    "identifier": "rd"
+  },
+  "minecraft:diagonal_up_left": {
+    "id": 22,
+    "identifier": "lud"
+  },
+  "minecraft:diagonal_right": {
+    "id": 23,
+    "identifier": "rud"
+  },
+  "minecraft:circle": {
+    "id": 24,
+    "identifier": "mc"
+  },
+  "minecraft:rhombus": {
+    "id": 25,
+    "identifier": "mr"
+  },
+  "minecraft:half_vertical": {
+    "id": 26,
+    "identifier": "vh"
+  },
+  "minecraft:half_horizontal": {
+    "id": 27,
+    "identifier": "hh"
+  },
+  "minecraft:half_vertical_right": {
+    "id": 28,
+    "identifier": "vhr"
+  },
+  "minecraft:half_horizontal_bottom": {
+    "id": 29,
+    "identifier": "hhb"
+  },
+  "minecraft:border": {
+    "id": 30,
+    "identifier": "bo"
+  },
+  "minecraft:curly_border": {
+    "id": 31,
+    "identifier": "cbo"
+  },
+  "minecraft:gradient": {
+    "id": 32,
+    "identifier": "gra"
+  },
+  "minecraft:gradient_up": {
+    "id": 33,
+    "identifier": "gru"
+  },
+  "minecraft:bricks": {
+    "id": 34,
+    "identifier": "bri"
+  },
+  "minecraft:globe": {
+    "id": 35,
+    "identifier": "glb"
+  },
+  "minecraft:creeper": {
+    "id": 36,
+    "identifier": "cre"
+  },
+  "minecraft:skull": {
+    "id": 37,
+    "identifier": "sku"
+  },
+  "minecraft:flower": {
+    "id": 38,
+    "identifier": "flo"
+  },
+  "minecraft:mojang": {
+    "id": 39,
+    "identifier": "moj"
+  },
+  "minecraft:piglin": {
+    "id": 40,
+    "identifier": "pig"
+  }
+}
