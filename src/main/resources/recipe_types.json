@@ -1,0 +1,94 @@
+[
+  {
+    "id": 0,
+    "name": "minecraft:crafting_shaped"
+  },
+  {
+    "id": 1,
+    "name": "minecraft:crafting_shapeless"
+  },
+  {
+    "id": 2,
+    "name": "minecraft:crafting_special_armordye"
+  },
+  {
+    "id": 3,
+    "name": "minecraft:crafting_special_bookcloning"
+  },
+  {
+    "id": 4,
+    "name": "minecraft:crafting_special_mapcloning"
+  },
+  {
+    "id": 5,
+    "name": "minecraft:crafting_special_mapextending"
+  },
+  {
+    "id": 6,
+    "name": "minecraft:crafting_special_firework_rocket"
+  },
+  {
+    "id": 7,
+    "name": "minecraft:crafting_special_firework_star"
+  },
+  {
+    "id": 8,
+    "name": "minecraft:crafting_special_firework_star_fade"
+  },
+  {
+    "id": 9,
+    "name": "minecraft:crafting_special_tippedarrow"
+  },
+  {
+    "id": 10,
+    "name": "minecraft:crafting_special_bannerduplicate"
+  },
+  {
+    "id": 11,
+    "name": "minecraft:crafting_special_shielddecoration"
+  },
+  {
+    "id": 12,
+    "name": "minecraft:crafting_special_shulkerboxcoloring"
+  },
+  {
+    "id": 13,
+    "name": "minecraft:crafting_special_suspiciousstew"
+  },
+  {
+    "id": 14,
+    "name": "minecraft:crafting_special_repairitem"
+  },
+  {
+    "id": 15,
+    "name": "minecraft:smelting"
+  },
+  {
+    "id": 16,
+    "name": "minecraft:blasting"
+  },
+  {
+    "id": 17,
+    "name": "minecraft:smoking"
+  },
+  {
+    "id": 18,
+    "name": "minecraft:campfire_cooking"
+  },
+  {
+    "id": 19,
+    "name": "minecraft:stonecutting"
+  },
+  {
+    "id": 20,
+    "name": "minecraft:smithing_transform"
+  },
+  {
+    "id": 21,
+    "name": "minecraft:smithing_trim"
+  },
+  {
+    "id": 22,
+    "name": "minecraft:crafting_decorated_pot"
+  }
+]

@@ -44,7 +44,7 @@ public class Main {
 
         CommandManager commandManager = MinecraftServer.getCommandManager();
         commandManager.register(new SaveCommand());
-        commandManager.register(new SyncCommand());
+//        commandManager.register(new SyncCommand());
 
         MinecraftServer.getGlobalEventHandler().addListener(ItemDropEvent.class, event -> {
             ItemStack item = event.getItemStack();
@@ -99,6 +99,7 @@ public class Main {
         var eventHandler = MinecraftServer.getGlobalEventHandler();
         eventHandler.addChild(EventNode.all("node").addListener(AsyncPlayerConfigurationEvent.class, event -> {
             final Player player = event.getPlayer();
+            player.setGameMode(GameMode.CREATIVE);
 
             var instances = MinecraftServer.getInstanceManager().getInstances();
             Instance instance = instances.stream().skip(new Random().nextInt(instances.size())).findFirst().orElse(null);

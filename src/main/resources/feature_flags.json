@@ -1,0 +1,11 @@
+{
+  "minecraft:bundle": {
+    "id": 0
+  },
+  "minecraft:vanilla": {
+    "id": 1
+  },
+  "minecraft:trade_rebalance": {
+    "id": 2
+  }
+}

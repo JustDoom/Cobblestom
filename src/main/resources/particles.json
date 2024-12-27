@@ -1,0 +1,442 @@
+{
+  "minecraft:angry_villager": {
+    "id": 0,
+    "hasData": false
+  },
+  "minecraft:block": {
+    "id": 1,
+    "hasData": true
+  },
+  "minecraft:block_marker": {
+    "id": 2,
+    "hasData": true
+  },
+  "minecraft:bubble": {
+    "id": 3,
+    "hasData": false
+  },
+  "minecraft:cloud": {
+    "id": 4,
+    "hasData": false
+  },
+  "minecraft:crit": {
+    "id": 5,
+    "hasData": false
+  },
+  "minecraft:damage_indicator": {
+    "id": 6,
+    "hasData": false
+  },
+  "minecraft:dragon_breath": {
+    "id": 7,
+    "hasData": false
+  },
+  "minecraft:dripping_lava": {
+    "id": 8,
+    "hasData": false
+  },
+  "minecraft:falling_lava": {
+    "id": 9,
+    "hasData": false
+  },
+  "minecraft:landing_lava": {
+    "id": 10,
+    "hasData": false
+  },
+  "minecraft:dripping_water": {
+    "id": 11,
+    "hasData": false
+  },
+  "minecraft:falling_water": {
+    "id": 12,
+    "hasData": false
+  },
+  "minecraft:dust": {
+    "id": 13,
+    "hasData": true
+  },
+  "minecraft:dust_color_transition": {
+    "id": 14,
+    "hasData": true
+  },
+  "minecraft:effect": {
+    "id": 15,
+    "hasData": false
+  },
+  "minecraft:elder_guardian": {
+    "id": 16,
+    "hasData": false
+  },
+  "minecraft:enchanted_hit": {
+    "id": 17,
+    "hasData": false
+  },
+  "minecraft:enchant": {
+    "id": 18,
+    "hasData": false
+  },
+  "minecraft:end_rod": {
+    "id": 19,
+    "hasData": false
+  },
+  "minecraft:entity_effect": {
+    "id": 20,
+    "hasData": true
+  },
+  "minecraft:explosion_emitter": {
+    "id": 21,
+    "hasData": false
+  },
+  "minecraft:explosion": {
+    "id": 22,
+    "hasData": false
+  },
+  "minecraft:gust": {
+    "id": 23,
+    "hasData": false
+  },
+  "minecraft:small_gust": {
+    "id": 24,
+    "hasData": false
+  },
+  "minecraft:gust_emitter_large": {
+    "id": 25,
+    "hasData": false
+  },
+  "minecraft:gust_emitter_small": {
+    "id": 26,
+    "hasData": false
+  },
+  "minecraft:sonic_boom": {
+    "id": 27,
+    "hasData": false
+  },
+  "minecraft:falling_dust": {
+    "id": 28,
+    "hasData": true
+  },
+  "minecraft:firework": {
+    "id": 29,
+    "hasData": false
+  },
+  "minecraft:fishing": {
+    "id": 30,
+    "hasData": false
+  },
+  "minecraft:flame": {
+    "id": 31,
+    "hasData": false
+  },
+  "minecraft:infested": {
+    "id": 32,
+    "hasData": false
+  },
+  "minecraft:cherry_leaves": {
+    "id": 33,
+    "hasData": false
+  },
+  "minecraft:sculk_soul": {
+    "id": 34,
+    "hasData": false
+  },
+  "minecraft:sculk_charge": {
+    "id": 35,
+    "hasData": true
+  },
+  "minecraft:sculk_charge_pop": {
+    "id": 36,
+    "hasData": false
+  },
+  "minecraft:soul_fire_flame": {
+    "id": 37,
+    "hasData": false
+  },
+  "minecraft:soul": {
+    "id": 38,
+    "hasData": false
+  },
+  "minecraft:flash": {
+    "id": 39,
+    "hasData": false
+  },
+  "minecraft:happy_villager": {
+    "id": 40,
+    "hasData": false
+  },
+  "minecraft:composter": {
+    "id": 41,
+    "hasData": false
+  },
+  "minecraft:heart": {
+    "id": 42,
+    "hasData": false
+  },
+  "minecraft:instant_effect": {
+    "id": 43,
+    "hasData": false
+  },
+  "minecraft:item": {
+    "id": 44,
+    "hasData": true
+  },
+  "minecraft:vibration": {
+    "id": 45,
+    "hasData": true
+  },
+  "minecraft:item_slime": {
+    "id": 46,
+    "hasData": false
+  },
+  "minecraft:item_cobweb": {
+    "id": 47,
+    "hasData": false
+  },
+  "minecraft:item_snowball": {
+    "id": 48,
+    "hasData": false
+  },
+  "minecraft:large_smoke": {
+    "id": 49,
+    "hasData": false
+  },
+  "minecraft:lava": {
+    "id": 50,
+    "hasData": false
+  },
+  "minecraft:mycelium": {
+    "id": 51,
+    "hasData": false
+  },
+  "minecraft:note": {
+    "id": 52,
+    "hasData": false
+  },
+  "minecraft:poof": {
+    "id": 53,
+    "hasData": false
+  },
+  "minecraft:portal": {
+    "id": 54,
+    "hasData": false
+  },
+  "minecraft:rain": {
+    "id": 55,
+    "hasData": false
+  },
+  "minecraft:smoke": {
+    "id": 56,
+    "hasData": false
+  },
+  "minecraft:white_smoke": {
+    "id": 57,
+    "hasData": false
+  },
+  "minecraft:sneeze": {
+    "id": 58,
+    "hasData": false
+  },
+  "minecraft:spit": {
+    "id": 59,
+    "hasData": false
+  },
+  "minecraft:squid_ink": {
+    "id": 60,
+    "hasData": false
+  },
+  "minecraft:sweep_attack": {
+    "id": 61,
+    "hasData": false
+  },
+  "minecraft:totem_of_undying": {
+    "id": 62,
+    "hasData": false
+  },
+  "minecraft:underwater": {
+    "id": 63,
+    "hasData": false
+  },
+  "minecraft:splash": {
+    "id": 64,
+    "hasData": false
+  },
+  "minecraft:witch": {
+    "id": 65,
+    "hasData": false
+  },
+  "minecraft:bubble_pop": {
+    "id": 66,
+    "hasData": false
+  },
+  "minecraft:current_down": {
+    "id": 67,
+    "hasData": false
+  },
+  "minecraft:bubble_column_up": {
+    "id": 68,
+    "hasData": false
+  },
+  "minecraft:nautilus": {
+    "id": 69,
+    "hasData": false
+  },
+  "minecraft:dolphin": {
+    "id": 70,
+    "hasData": false
+  },
+  "minecraft:campfire_cosy_smoke": {
+    "id": 71,
+    "hasData": false
+  },
+  "minecraft:campfire_signal_smoke": {
+    "id": 72,
+    "hasData": false
+  },
+  "minecraft:dripping_honey": {
+    "id": 73,
+    "hasData": false
+  },
+  "minecraft:falling_honey": {
+    "id": 74,
+    "hasData": false
+  },
+  "minecraft:landing_honey": {
+    "id": 75,
+    "hasData": false
+  },
+  "minecraft:falling_nectar": {
+    "id": 76,
+    "hasData": false
+  },
+  "minecraft:falling_spore_blossom": {
+    "id": 77,
+    "hasData": false
+  },
+  "minecraft:ash": {
+    "id": 78,
+    "hasData": false
+  },
+  "minecraft:crimson_spore": {
+    "id": 79,
+    "hasData": false
+  },
+  "minecraft:warped_spore": {
+    "id": 80,
+    "hasData": false
+  },
+  "minecraft:spore_blossom_air": {
+    "id": 81,
+    "hasData": false
+  },
+  "minecraft:dripping_obsidian_tear": {
+    "id": 82,
+    "hasData": false
+  },
+  "minecraft:falling_obsidian_tear": {
+    "id": 83,
+    "hasData": false
+  },
+  "minecraft:landing_obsidian_tear": {
+    "id": 84,
+    "hasData": false
+  },
+  "minecraft:reverse_portal": {
+    "id": 85,
+    "hasData": false
+  },
+  "minecraft:white_ash": {
+    "id": 86,
+    "hasData": false
+  },
+  "minecraft:small_flame": {
+    "id": 87,
+    "hasData": false
+  },
+  "minecraft:snowflake": {
+    "id": 88,
+    "hasData": false
+  },
+  "minecraft:dripping_dripstone_lava": {
+    "id": 89,
+    "hasData": false
+  },
+  "minecraft:falling_dripstone_lava": {
+    "id": 90,
+    "hasData": false
+  },
+  "minecraft:dripping_dripstone_water": {
+    "id": 91,
+    "hasData": false
+  },
+  "minecraft:falling_dripstone_water": {
+    "id": 92,
+    "hasData": false
+  },
+  "minecraft:glow_squid_ink": {
+    "id": 93,
+    "hasData": false
+  },
+  "minecraft:glow": {
+    "id": 94,
+    "hasData": false
+  },
+  "minecraft:wax_on": {
+    "id": 95,
+    "hasData": false
+  },
+  "minecraft:wax_off": {
+    "id": 96,
+    "hasData": false
+  },
+  "minecraft:electric_spark": {
+    "id": 97,
+    "hasData": false
+  },
+  "minecraft:scrape": {
+    "id": 98,
+    "hasData": false
+  },
+  "minecraft:shriek": {
+    "id": 99,
+    "hasData": true
+  },
+  "minecraft:egg_crack": {
+    "id": 100,
+    "hasData": false
+  },
+  "minecraft:dust_plume": {
+    "id": 101,
+    "hasData": false
+  },
+  "minecraft:trial_spawner_detection": {
+    "id": 102,
+    "hasData": false
+  },
+  "minecraft:trial_spawner_detection_ominous": {
+    "id": 103,
+    "hasData": false
+  },
+  "minecraft:vault_connection": {
+    "id": 104,
+    "hasData": false
+  },
+  "minecraft:dust_pillar": {
+    "id": 105,
+    "hasData": true
+  },
+  "minecraft:ominous_spawning": {
+    "id": 106,
+    "hasData": false
+  },
+  "minecraft:raid_omen": {
+    "id": 107,
+    "hasData": false
+  },
+  "minecraft:trial_omen": {
+    "id": 108,
+    "hasData": false
+  },
+  "cobblemon:snowstorm": {
+    "id": 109,
+    "hasData": true
+  }
+}

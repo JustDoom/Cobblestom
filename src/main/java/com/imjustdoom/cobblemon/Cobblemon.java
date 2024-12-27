@@ -8,8 +8,6 @@ import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.network.NetworkBuffer;
 import net.minestom.server.network.packet.client.common.ClientPluginMessagePacket;
 
-import java.util.Optional;
-
 public class Cobblemon {
 
     public void start() {
@@ -22,7 +20,7 @@ public class Cobblemon {
                 System.out.println("data - " + new String((((ClientPluginMessagePacket) playerPacketEvent.getPacket()).data())));
 
                 if (((ClientPluginMessagePacket) playerPacketEvent.getPacket()).channel().equals("cobblemon:request_starter_screen")) {
-                    NetworkBuffer buffer = NetworkBuffer.resizableBuffer(0);
+                    NetworkBuffer buffer = NetworkBuffer.resizableBuffer(1024);
 
                     buffer.write(NetworkBuffer.INT, 3); //category size
 
@@ -46,36 +44,36 @@ public class Cobblemon {
                 }
             }
         }).addListener(PlayerSpawnEvent.class, playerLoginEvent -> {
-            Player player = playerLoginEvent.getPlayer();
-
-//            player.sendMessage("To sync with cobblemon type \"/sync\". I need to make it work on login still");
-
-            System.out.println(1);
-            NetworkBuffer buffer = NetworkBuffer.builder(1024).build();
-
-            SyncPacket.SERIALIZER.write(buffer,
-                    new SyncPacket("cobblemon:general", false, false, false,
-                            false, false, null, null, null));
-
-            System.out.println(2);
-            player.sendPluginMessage("cobblemon:set_client_playerdata", buffer.read(NetworkBuffer.RAW_BYTES));
-            System.out.println(3);
-
-            buffer = NetworkBuffer.builder(0).build();
-            NetworkBuffer listBuffer = NetworkBuffer.resizableBuffer(1024, buffer.registries());
-            listBuffer.write(NetworkBuffer.VAR_INT, 5); // count of pokemon to add
-
-            addEntity(listBuffer, "charmander", "Charmander", "fire");
-            addEntity(buffer, "pikachu", "Pikachu", "electric");
-            addEntity(buffer, "mew", "Mew", "psychic");
-            addEntity(buffer, "seel", "Seel", "water");
-            addEntity(buffer, "jynx", "Jynx", "dark");
-
-            buffer.write(NetworkBuffer.BYTE_ARRAY, listBuffer.read(NetworkBuffer.RAW_BYTES));
-
-            System.out.println(5);
-            player.sendPluginMessage("cobblemon:species_sync", buffer.read(NetworkBuffer.RAW_BYTES));
-            System.out.println(6);
+//            Player player = playerLoginEvent.getPlayer();
+//
+////            player.sendMessage("To sync with cobblemon type \"/sync\". I need to make it work on login still");
+//
+//            System.out.println(1);
+//            NetworkBuffer buffer = NetworkBuffer.resizableBuffer(1024);
+//
+//            SyncPacket.SERIALIZER.write(buffer,
+//                    new SyncPacket("cobblemon:general", false, false, false,
+//                            false, false, null, null, null));
+//
+//            System.out.println(2);
+//            player.sendPluginMessage("cobblemon:set_client_playerdata", buffer.read(NetworkBuffer.RAW_BYTES));
+//            System.out.println(3);
+//
+//            buffer = NetworkBuffer.resizableBuffer(1024);
+//            NetworkBuffer listBuffer = NetworkBuffer.resizableBuffer(1024, buffer.registries());
+//            listBuffer.write(NetworkBuffer.VAR_INT, 5); // count of pokemon to add
+//
+//            addEntity(listBuffer, "charmander", "Charmander", "fire");
+//            addEntity(buffer, "pikachu", "Pikachu", "electric");
+//            addEntity(buffer, "mew", "Mew", "psychic");
+//            addEntity(buffer, "seel", "Seel", "water");
+//            addEntity(buffer, "jynx", "Jynx", "dark");
+//
+//            buffer.write(NetworkBuffer.BYTE_ARRAY, listBuffer.read(NetworkBuffer.RAW_BYTES));
+//
+//            System.out.println(5);
+//            player.sendPluginMessage("cobblemon:species_sync", buffer.read(NetworkBuffer.RAW_BYTES));
+//            System.out.println(6);
         });
     }
 
