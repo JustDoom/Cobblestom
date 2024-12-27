@@ -14,7 +14,7 @@ import net.minestom.server.entity.ItemEntity;
 import net.minestom.server.entity.Player;
 import net.minestom.server.event.EventNode;
 import net.minestom.server.event.item.ItemDropEvent;
-import net.minestom.server.event.player.PlayerLoginEvent;
+import net.minestom.server.event.player.AsyncPlayerConfigurationEvent;
 import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.event.server.ServerListPingEvent;
 import net.minestom.server.instance.Instance;
@@ -30,7 +30,6 @@ import net.minestom.server.utils.time.TimeUnit;
 import net.minestom.server.world.DimensionType;
 
 import java.util.Random;
-import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
@@ -98,7 +97,7 @@ public class Main {
         instanceContainer.setChunkSupplier(LightingChunk::new);
 
         var eventHandler = MinecraftServer.getGlobalEventHandler();
-        eventHandler.addChild(EventNode.all("node").addListener(PlayerLoginEvent.class, event -> {
+        eventHandler.addChild(EventNode.all("node").addListener(AsyncPlayerConfigurationEvent.class, event -> {
             final Player player = event.getPlayer();
 
             var instances = MinecraftServer.getInstanceManager().getInstances();
@@ -114,9 +113,6 @@ public class Main {
             player.setPermissionLevel(4);
             ItemStack itemStack = ItemStack.builder(Material.STONE)
                     .amount(64)
-                    .meta(itemMetaBuilder ->
-                            itemMetaBuilder.canPlaceOn(Set.of(Block.STONE))
-                                    .canDestroy(Set.of(Block.DIAMOND_ORE)))
                     .build();
             player.getInventory().addItemStack(itemStack);
 
