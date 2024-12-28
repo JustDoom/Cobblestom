@@ -7,20 +7,18 @@ import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.minestom.server.MinecraftServer;
+import net.minestom.server.ServerFlag;
 import net.minestom.server.command.CommandManager;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.ItemEntity;
 import net.minestom.server.entity.Player;
-import net.minestom.server.event.EventNode;
 import net.minestom.server.event.item.ItemDropEvent;
+import net.minestom.server.event.item.PickupItemEvent;
 import net.minestom.server.event.player.AsyncPlayerConfigurationEvent;
 import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.event.server.ServerListPingEvent;
-import net.minestom.server.instance.Instance;
-import net.minestom.server.instance.InstanceContainer;
-import net.minestom.server.instance.InstanceManager;
-import net.minestom.server.instance.LightingChunk;
+import net.minestom.server.instance.*;
 import net.minestom.server.instance.block.Block;
 import net.minestom.server.item.ItemStack;
 import net.minestom.server.item.Material;
@@ -33,6 +31,8 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
+//        System.setProperty("minestom.max-packet-size", "10000000");
+        System.setProperty("minestom.registry.unsafe-ops", "true");
         System.setProperty("minestom.use-new-chunk-sending", "true");
         System.setProperty("minestom.experiment.pose-updates", "true");
 
@@ -99,6 +99,10 @@ public class Main {
                     .amount(64)
                     .build();
             player.getInventory().addItemStack(itemStack);
+        }).addListener(PickupItemEvent.class, event -> {
+            if (event.getLivingEntity() instanceof Player player) {
+                player.getInventory().addItemStack(event.getItemStack());
+            }
         });
 
         new Cobblemon().start(); // start cobblemon related stuff

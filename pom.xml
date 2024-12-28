@@ -25,7 +25,7 @@
         <dependency>
             <groupId>com.github.lowercasebtw</groupId>
             <artifactId>minestom_1-21-1</artifactId>
-            <version>020fc5dae9</version>
+            <version>f0c84ad98d</version>
         </dependency>
     </dependencies>
 
