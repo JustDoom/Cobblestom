@@ -1,6 +1,8 @@
 package com.imjustdoom;
 
 import com.imjustdoom.cobblemon.Cobblemon;
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.Style;
@@ -23,6 +25,7 @@ import net.minestom.server.instance.block.Block;
 import net.minestom.server.item.ItemStack;
 import net.minestom.server.item.Material;
 import net.minestom.server.ping.ResponseData;
+import net.minestom.server.utils.NamespaceID;
 import net.minestom.server.utils.identity.NamedAndIdentified;
 import net.minestom.server.utils.time.TimeUnit;
 import net.minestom.server.world.DimensionType;
@@ -95,14 +98,14 @@ public class Main {
             final Player player = event.getPlayer();
             player.setGameMode(GameMode.CREATIVE);
             player.setPermissionLevel(4);
-            ItemStack itemStack = ItemStack.builder(Material.STONE)
-                    .amount(64)
-                    .build();
-            player.getInventory().addItemStack(itemStack);
+            player.getInventory().addItemStack(ItemStack.of(Material.STONE));
+            player.getInventory().addItemStack(ItemStack.of(Material.fromNamespaceId("cobblemon:full_heal")));
         }).addListener(PickupItemEvent.class, event -> {
             if (event.getLivingEntity() instanceof Player player) {
                 player.getInventory().addItemStack(event.getItemStack());
             }
+
+            event.getInstance().playSound(Sound.sound(Key.key("cobblemon:poke_ball.send_out"), Sound.Source.NEUTRAL, 1, 1));
         });
 
         new Cobblemon().start(); // start cobblemon related stuff
