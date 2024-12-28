@@ -99,7 +99,7 @@ public class Main {
             player.setGameMode(GameMode.CREATIVE);
             player.setPermissionLevel(4);
             player.getInventory().addItemStack(ItemStack.of(Material.STONE));
-            player.getInventory().addItemStack(ItemStack.of(Material.fromNamespaceId("cobblemon:full_heal")));
+            player.getInventory().addItemStack(ItemStack.of(CobblemonMaterials.AIR_BALLOON));
         }).addListener(PickupItemEvent.class, event -> {
             if (event.getLivingEntity() instanceof Player player) {
                 player.getInventory().addItemStack(event.getItemStack());
