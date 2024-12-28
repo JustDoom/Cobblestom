@@ -19,15 +19,6 @@
             <id>jitpack</id>
             <url>https://jitpack.io</url>
         </repository>
-<!--        <repository>-->
-<!--            <id>central</id>-->
-<!--            <name>Maven Central</name>-->
-<!--            <layout>default</layout>-->
-<!--            <url>https://repo1.maven.org/maven2</url>-->
-<!--            <snapshots>-->
-<!--                <enabled>false</enabled>-->
-<!--            </snapshots>-->
-<!--        </repository>-->
     </repositories>
 
     <dependencies>
@@ -36,39 +27,6 @@
             <artifactId>minestom_1-21-1</artifactId>
             <version>020fc5dae9</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>net.minestom2</groupId>-->
-<!--            <artifactId>minestom</artifactId>-->
-<!--            <version>nou</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>/home/doom/Documents/GitHub/Cobblestom/minestom-dev.jar</systemPath>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>net.kyori</groupId>-->
-<!--            <artifactId>adventure-api</artifactId>-->
-<!--&lt;!&ndash;            <scope>compile</scope>&ndash;&gt;-->
-<!--            <version>4.17.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--        <groupId>org.slf4j</groupId>-->
-<!--        <artifactId>slf4j-api</artifactId>-->
-<!--        <version>2.0.7</version>-->
-<!--    </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>net.minestom</groupId>-->
-<!--            <artifactId>minestom-snapshots</artifactId>-->
-<!--            <version>f966351cb7</version>-->
-<!--        </dependency>-->
-<!--                <dependency>-->
-<!--                    <groupId>com.github.ALS-Project</groupId>-->
-<!--                    <artifactId>Minestom-States</artifactId>-->
-<!--                    <version>06c7687</version>-->
-<!--                </dependency>-->
-<!--                <dependency>-->
-<!--                    <groupId>com.github.ALS-Project</groupId>-->
-<!--                    <artifactId>Minestom-Utilities</artifactId>-->
-<!--                    <version>01c3fd6fa3</version>-->
-<!--                </dependency>-->
     </dependencies>
 
     <build>

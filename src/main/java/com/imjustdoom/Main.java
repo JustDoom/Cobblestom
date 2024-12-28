@@ -99,7 +99,6 @@ public class Main {
         var eventHandler = MinecraftServer.getGlobalEventHandler();
         eventHandler.addChild(EventNode.all("node").addListener(AsyncPlayerConfigurationEvent.class, event -> {
             final Player player = event.getPlayer();
-            player.setGameMode(GameMode.CREATIVE);
 
             var instances = MinecraftServer.getInstanceManager().getInstances();
             Instance instance = instances.stream().skip(new Random().nextInt(instances.size())).findFirst().orElse(null);
@@ -107,8 +106,7 @@ public class Main {
             int x = Math.abs(ThreadLocalRandom.current().nextInt()) % 500 - 250;
             int z = Math.abs(ThreadLocalRandom.current().nextInt()) % 500 - 250;
             player.setRespawnPoint(new Pos(0, 40f, 0));
-        })
-                .addListener(PlayerSpawnEvent.class, event -> {
+        }).addListener(PlayerSpawnEvent.class, event -> {
             final Player player = event.getPlayer();
             player.setGameMode(GameMode.CREATIVE);
             player.setPermissionLevel(4);
@@ -116,16 +114,6 @@ public class Main {
                     .amount(64)
                     .build();
             player.getInventory().addItemStack(itemStack);
-
-//            ItemStack bundle = ItemStack.builder(Material.BUNDLE)
-//                    .meta(BundleMeta.class, bundleMetaBuilder -> {
-//                        bundleMetaBuilder.addItem(ItemStack.of(Material.DIAMOND, 5));
-//                        bundleMetaBuilder.addItem(ItemStack.of(Material.fromNamespaceId("minestomdatagen:villager_in_a_bucket"), 5));
-//                    })
-//                    .build();
-//            player.getInventory().addItemStack(bundle);
-//
-//            player.getInventory().addItemStack(ItemStack.of(Material.fromNamespaceId("minestomdatagen:villager_in_a_bucket")));
         }));
 
         new Cobblemon().start(); // start cobblemon related stuff
