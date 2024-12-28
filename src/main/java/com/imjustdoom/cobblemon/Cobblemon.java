@@ -1,6 +1,9 @@
 package com.imjustdoom.cobblemon;
 
 import com.imjustdoom.packet.SyncPacket;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.entity.Player;
 import net.minestom.server.event.player.PlayerPacketEvent;
@@ -14,14 +17,12 @@ public class Cobblemon {
         MinecraftServer.getGlobalEventHandler().addListener(PlayerPacketEvent.class, playerPacketEvent -> {
 
             Player player = playerPacketEvent.getPlayer();
-            System.out.println("packet - " + playerPacketEvent.getPacket());
 
             if (playerPacketEvent.getPacket() instanceof ClientPluginMessagePacket) {
                 System.out.println("type - " + playerPacketEvent.getPacket());
                 System.out.println("data - " + new String((((ClientPluginMessagePacket) playerPacketEvent.getPacket()).data())));
 
                 if (((ClientPluginMessagePacket) playerPacketEvent.getPacket()).channel().equals("cobblemon:request_starter_screen")) {
-                    System.out.println("start");
                     NetworkBuffer buffer = NetworkBuffer.resizableBuffer(0);
 
                     buffer.write(NetworkBuffer.INT, 3); //category size
@@ -41,7 +42,6 @@ public class Cobblemon {
                     addStarter(buffer, "mew");
 
                     player.sendPluginMessage("cobblemon:open_starter", buffer.read(NetworkBuffer.RAW_BYTES));
-                    System.out.println("end");
                 } else if (((ClientPluginMessagePacket) playerPacketEvent.getPacket()).channel().equals("cobblemon:select_starter")) {
                     player.sendMessage("[EA] Selecting a starter costs $9.99. Purchase?");
                 }
@@ -50,36 +50,31 @@ public class Cobblemon {
             Player player = playerLoginEvent.getPlayer();
             if (!playerLoginEvent.isFirstSpawn()) return;
 
-//            player.sendMessage("To sync with cobblemon type \"/sync\". I need to make it work on login still");
-
-            System.out.println(1);
             NetworkBuffer buffer = NetworkBuffer.resizableBuffer(0);
 
             SyncPacket.SERIALIZER.write(buffer,
                     new SyncPacket("cobblemon:general", false, false, false,
                             false, false, null, null, null));
 
-            System.out.println(2);
             player.sendPluginMessage("cobblemon:set_client_playerdata", buffer.read(NetworkBuffer.RAW_BYTES));
-            System.out.println(3);
 
             buffer = NetworkBuffer.resizableBuffer(1024);
             NetworkBuffer listBuffer = NetworkBuffer.resizableBuffer(512);
             listBuffer.write(NetworkBuffer.VAR_INT, 5); // count of pokemon to add
 
-            Cobblemon.addEntity(listBuffer, "charmander", "Charmander", "fire");
-            Cobblemon.addEntity(listBuffer, "pikachu", "Pikachu", "electric");
-            Cobblemon.addEntity(listBuffer, "mew", "Mew", "psychic");
-            Cobblemon.addEntity(listBuffer, "seel", "Seel", "water");
-            Cobblemon.addEntity(listBuffer, "jynx", "Jynx", "dark");
+            addEntity(listBuffer, "charmander", "Charmander", "fire");
+            addEntity(listBuffer, "pikachu", "Pikachu", "electric");
+            addEntity(listBuffer, "mew", "Mew", "psychic");
+            addEntity(listBuffer, "seel", "Seel", "water");
+            addEntity(listBuffer, "jynx", "Jynx", "dark");
 
             byte[] bytes = listBuffer.read(NetworkBuffer.RAW_BYTES);
             buffer.write(NetworkBuffer.INT, bytes.length);
             buffer.write(NetworkBuffer.RAW_BYTES, bytes);
 
-            System.out.println(5);
             player.sendPluginMessage("cobblemon:species_sync", buffer.read(NetworkBuffer.RAW_BYTES));
-            System.out.println(6);
+
+            player.sendMessage(Component.text("Successfully synced with Cobblemon!", NamedTextColor.GREEN));
         });
     }
 

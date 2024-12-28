@@ -30,13 +30,9 @@ import net.minestom.server.utils.time.TimeUnit;
 import net.minestom.server.world.DimensionType;
 
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
     public static void main(String[] args) {
-        // General minestom setup stuff
-        // most code copied from the minestom ce example
-
         System.setProperty("minestom.use-new-chunk-sending", "true");
         System.setProperty("minestom.experiment.pose-updates", "true");
 
@@ -44,7 +40,6 @@ public class Main {
 
         CommandManager commandManager = MinecraftServer.getCommandManager();
         commandManager.register(new SaveCommand());
-//        commandManager.register(new SyncCommand());
 
         MinecraftServer.getGlobalEventHandler().addListener(ItemDropEvent.class, event -> {
             ItemStack item = event.getItemStack();
@@ -60,7 +55,6 @@ public class Main {
             responseData.addEntry(NamedAndIdentified.named("The first line is separated from the others"));
             responseData.addEntry(NamedAndIdentified.named("Could be a name, or a message"));
 
-            // on modern versions, you can obtain the player connection directly from the event
             if (event.getConnection() != null) {
                 responseData.addEntry(NamedAndIdentified.named("IP test: " + event.getConnection().getRemoteAddress().toString()));
 
@@ -80,31 +74,22 @@ public class Main {
                     .append(Component.text(": ", NamedTextColor.GRAY))
                     .append(Component.text(System.currentTimeMillis(), Style.style(TextDecoration.ITALIC)))));
 
-            // components will be converted the legacy section sign format so they are displayed in the client
-            responseData.addEntry(NamedAndIdentified.named(Component.text("You can use ").append(Component.text("styling too!", NamedTextColor.RED, TextDecoration.BOLD))));
-
-            // the data will be automatically converted to the correct format on response, so you can do RGB and it'll be downsampled!
-            // on legacy versions, colors will be converted to the section format so it'll work there too
             responseData.setDescription(Component.text("This is a Minestom Server", TextColor.color(0x66b3ff)));
-            //responseData.setPlayersHidden(true);
         });
 
         InstanceManager instanceManager = MinecraftServer.getInstanceManager();
 
         InstanceContainer instanceContainer = instanceManager.createInstanceContainer(DimensionType.OVERWORLD);
         instanceContainer.setGenerator(unit -> unit.modifier().fillHeight(0, 40, Block.STONE));
-//        instanceContainer.setChunkSupplier();
         instanceContainer.setChunkSupplier(LightingChunk::new);
 
         var eventHandler = MinecraftServer.getGlobalEventHandler();
-        eventHandler.addChild(EventNode.all("node").addListener(AsyncPlayerConfigurationEvent.class, event -> {
+        eventHandler.addListener(AsyncPlayerConfigurationEvent.class, event -> {
             final Player player = event.getPlayer();
 
             var instances = MinecraftServer.getInstanceManager().getInstances();
             Instance instance = instances.stream().skip(new Random().nextInt(instances.size())).findFirst().orElse(null);
             event.setSpawningInstance(instance);
-            int x = Math.abs(ThreadLocalRandom.current().nextInt()) % 500 - 250;
-            int z = Math.abs(ThreadLocalRandom.current().nextInt()) % 500 - 250;
             player.setRespawnPoint(new Pos(0, 40f, 0));
         }).addListener(PlayerSpawnEvent.class, event -> {
             final Player player = event.getPlayer();
@@ -114,7 +99,7 @@ public class Main {
                     .amount(64)
                     .build();
             player.getInventory().addItemStack(itemStack);
-        }));
+        });
 
         new Cobblemon().start(); // start cobblemon related stuff
 
