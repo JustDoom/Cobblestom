@@ -1,4 +1,4 @@
-package com.imjustdoom;
+package com.imjustdoom.material;
 
 import net.minestom.server.item.Material;
 

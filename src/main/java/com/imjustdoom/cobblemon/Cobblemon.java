@@ -1,15 +1,19 @@
 package com.imjustdoom.cobblemon;
 
-import com.imjustdoom.packet.SyncPacket;
+import com.imjustdoom.Main;
+import com.imjustdoom.PlayerData;
+import com.imjustdoom.packet.in.SelectStarterPacket;
+import com.imjustdoom.packet.out.SyncPacket;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.entity.Player;
 import net.minestom.server.event.player.PlayerPacketEvent;
 import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.network.NetworkBuffer;
 import net.minestom.server.network.packet.client.common.ClientPluginMessagePacket;
+
+import java.util.UUID;
 
 public class Cobblemon {
 
@@ -23,6 +27,7 @@ public class Cobblemon {
                 System.out.println("data - " + new String((((ClientPluginMessagePacket) playerPacketEvent.getPacket()).data())));
 
                 if (((ClientPluginMessagePacket) playerPacketEvent.getPacket()).channel().equals("cobblemon:request_starter_screen")) {
+
                     NetworkBuffer buffer = NetworkBuffer.resizableBuffer(0);
 
                     buffer.write(NetworkBuffer.INT, 3); //category size
@@ -44,6 +49,30 @@ public class Cobblemon {
                     player.sendPluginMessage("cobblemon:open_starter", buffer.read(NetworkBuffer.RAW_BYTES));
                 } else if (((ClientPluginMessagePacket) playerPacketEvent.getPacket()).channel().equals("cobblemon:select_starter")) {
                     player.sendMessage("[EA] Selecting a starter costs $9.99. Purchase?");
+
+                    byte[] data = ((ClientPluginMessagePacket) playerPacketEvent.getPacket()).data();
+                    NetworkBuffer buffer = NetworkBuffer.builder(data.length).build();
+                    buffer.write(NetworkBuffer.RAW_BYTES, data);
+                    SelectStarterPacket packet = SelectStarterPacket.SERIALIZER.read(buffer);
+
+                    System.out.println(packet.category() + " - " + packet.selected());
+
+                    buffer = NetworkBuffer.resizableBuffer(16);
+                    SyncPacket.SERIALIZER.write(buffer,
+                            new SyncPacket("cobblemon:general", false, true, false,
+                                    true, false, UUID.randomUUID(), null, null));
+
+                    player.sendPluginMessage("cobblemon:set_client_playerdata", buffer.read(NetworkBuffer.RAW_BYTES));
+
+                    buffer = NetworkBuffer.resizableBuffer(16);
+                    buffer.write(NetworkBuffer.UUID, player.getUuid()); // player uuid?
+                    buffer.write(NetworkBuffer.SHORT, (short) 0);
+                    player.sendPluginMessage("cobblemon:set_party_pokemon", buffer.read(NetworkBuffer.RAW_BYTES));
+
+
+//                    Tag<Pokemon>e = new Tag<Pokemon>();
+
+
                 }
             }
         }).addListener(PlayerSpawnEvent.class, playerLoginEvent -> {
@@ -74,6 +103,8 @@ public class Cobblemon {
 
             player.sendPluginMessage("cobblemon:species_sync", buffer.read(NetworkBuffer.RAW_BYTES));
 
+            Main.dataMap.put(player.getUuid(), new PlayerData(player));
+
             player.sendMessage(Component.text("Successfully synced with Cobblemon!", NamedTextColor.GREEN));
         });
     }
@@ -84,7 +115,7 @@ public class Cobblemon {
     }
 
     private void addRegion(NetworkBuffer buffer, String name, int size) {
-        buffer.write(NetworkBuffer.STRING, "Kanto"); // cat name
+        buffer.write(NetworkBuffer.STRING, name); // cat name
         buffer.write(NetworkBuffer.STRING, "cobblemon.starterselection.category." + name.toLowerCase()); // display name
         buffer.write(NetworkBuffer.INT, size); // size of list?
     }

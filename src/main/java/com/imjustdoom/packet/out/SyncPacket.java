@@ -1,4 +1,4 @@
-package com.imjustdoom.packet;
+package com.imjustdoom.packet.out;
 
 import net.minestom.server.network.NetworkBuffer;
 import net.minestom.server.network.NetworkBufferTemplate;
