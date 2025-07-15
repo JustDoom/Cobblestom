@@ -36,8 +36,6 @@ import net.minestom.server.world.DimensionType;
 import java.util.*;
 
 public class Main {
-    public static Map<UUID, PlayerData> dataMap = new HashMap<>();
-
     public static void main(String[] args) {
         System.setProperty("minestom.registry.unsafe-ops", "true");
         System.setProperty("minestom.use-new-chunk-sending", "true");

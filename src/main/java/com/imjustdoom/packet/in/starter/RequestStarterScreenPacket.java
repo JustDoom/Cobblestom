@@ -1,8 +1,8 @@
 package com.imjustdoom.packet.in.starter;
 
+import com.imjustdoom.PlayerData;
 import com.imjustdoom.packet.handler.PacketHandler;
 import net.kyori.adventure.text.Component;
-import net.minestom.server.entity.Player;
 import net.minestom.server.network.NetworkBuffer;
 import net.minestom.server.network.NetworkBufferTemplate;
 
@@ -10,14 +10,14 @@ public record RequestStarterScreenPacket() implements PacketHandler {
     public static final NetworkBuffer.Type<RequestStarterScreenPacket> SERIALIZER = NetworkBufferTemplate.template(RequestStarterScreenPacket::new);
 
     @Override
-    public void handle(Player player) {
+    public void handle(PlayerData player) {
         // TODO: Branches. Already selected, cannot choose or send the options. Store player data to know
 
         if (false) {// Already selected a starter
-            player.sendMessage(Component.translatable("cobblemon.ui.starter.alreadyselected"));
+            player.getPlayer().sendMessage(Component.translatable("cobblemon.ui.starter.alreadyselected"));
             return;
         } else if (false) {// Cannot choose
-            player.sendMessage(Component.translatable("cobblemon.ui.starter.cannotchoose"));
+            player.getPlayer().sendMessage(Component.translatable("cobblemon.ui.starter.cannotchoose"));
             return;
         }
 
@@ -29,7 +29,7 @@ public record RequestStarterScreenPacket() implements PacketHandler {
         addRegion(buffer, "Kalos", "seel", "jynx");
         addRegion(buffer, "test", "mew");
 
-        player.sendPluginMessage("cobblemon:open_starter", buffer.read(NetworkBuffer.RAW_BYTES));
+        player.getPlayer().sendPluginMessage("cobblemon:open_starter", buffer.read(NetworkBuffer.RAW_BYTES));
     }
 
     /**

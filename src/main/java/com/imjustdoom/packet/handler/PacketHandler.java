@@ -1,7 +1,7 @@
 package com.imjustdoom.packet.handler;
 
-import net.minestom.server.entity.Player;
+import com.imjustdoom.PlayerData;
 
 public interface PacketHandler extends Packet {
-    void handle(Player player);
+    void handle(PlayerData player);
 }

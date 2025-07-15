@@ -1,6 +1,5 @@
 package com.imjustdoom.cobblemon;
 
-import com.imjustdoom.Main;
 import com.imjustdoom.PlayerData;
 import com.imjustdoom.packet.CobblemonPacketListener;
 import com.imjustdoom.packet.out.SetClientPlayerDataPacket;
@@ -12,8 +11,13 @@ import net.minestom.server.entity.Player;
 import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.network.NetworkBuffer;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class Cobblemon {
     private final CobblemonPacketListener packetListener = new CobblemonPacketListener();
+    private final Map<UUID, PlayerData> playerDataMap = new HashMap<>();
 
     public Cobblemon() {
         INSTANCE = this;
@@ -23,15 +27,15 @@ public class Cobblemon {
         this.packetListener.init();
 
         MinecraftServer.getGlobalEventHandler().addListener(PlayerSpawnEvent.class, playerLoginEvent -> {
-            Player player = playerLoginEvent.getPlayer();
             if (!playerLoginEvent.isFirstSpawn()) {
                 return;
             }
 
-            Cobblemon.get().getPacketListener().write(player, "cobblemon:set_client_playerdata", new SetClientPlayerDataPacket("cobblemon:general", false, false, false, false, false, null, null, null));
+            Player player = playerLoginEvent.getPlayer();
+            PlayerData playerData = new PlayerData(player);
+            playerData.write(new SetClientPlayerDataPacket("cobblemon:general", false, false, false, false, false, null, null, null));
 
             // TODO: Write proper packet serializers for these
-            NetworkBuffer buffer = NetworkBuffer.resizableBuffer(1024);
             NetworkBuffer listBuffer = NetworkBuffer.resizableBuffer(512);
 
             CobblemonEntitiesBuilder builder = new CobblemonEntitiesBuilder().addEntity("charmander", "Charmander", "fire").addEntity("pikachu", "Pikachu", "electric").addEntity("mew", "Mew", "psychic").addEntity("seel", "Seel", "water").addEntity("jynx", "Jynx", "dark");
@@ -40,9 +44,9 @@ public class Cobblemon {
             builder.build(listBuffer);
 
             byte[] bytes = listBuffer.read(NetworkBuffer.RAW_BYTES);
-            Cobblemon.get().getPacketListener().write(player, "cobblemon:species_sync", new SpeciesSyncPacket(bytes.length, bytes));
+            playerData.write(new SpeciesSyncPacket(bytes.length, bytes));
 
-            Main.dataMap.put(player.getUuid(), new PlayerData(player));
+            this.playerDataMap.put(player.getUuid(), playerData);
 
             player.sendMessage(Component.text("Successfully synced with Cobblemon!", NamedTextColor.GREEN));
         });
@@ -50,6 +54,10 @@ public class Cobblemon {
 
     public CobblemonPacketListener getPacketListener() {
         return this.packetListener;
+    }
+
+    public Map<UUID, PlayerData> getPlayerDataMap() {
+        return this.playerDataMap;
     }
 
     private static Cobblemon INSTANCE;
