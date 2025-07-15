@@ -1,8 +1,7 @@
 package com.imjustdoom.packet.handler;
 
-import net.minestom.server.network.NetworkBuffer;
+import net.minestom.server.entity.Player;
 
-public interface PacketHandler {
-
-    void handle(NetworkBuffer buffer);
+public interface PacketHandler extends Packet {
+    void handle(Player player);
 }
