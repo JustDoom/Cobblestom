@@ -3,7 +3,8 @@ package com.imjustdoom.cobblemon;
 import com.imjustdoom.Main;
 import com.imjustdoom.PlayerData;
 import com.imjustdoom.packet.in.SelectStarterPacket;
-import com.imjustdoom.packet.out.SyncPacket;
+import com.imjustdoom.packet.out.SetClientPlayerDataPacket;
+import com.imjustdoom.packet.out.SpeciesSyncPacket;
 import com.imjustdoom.packet.out.party.SetPartyCobblemonPacket;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -58,8 +59,8 @@ public class Cobblemon {
                     System.out.println(packet.category() + " - " + packet.selected());
 
                     buffer = NetworkBuffer.resizableBuffer(16);
-                    SyncPacket.SERIALIZER.write(buffer,
-                            new SyncPacket("cobblemon:general", false, true, false,
+                    SetClientPlayerDataPacket.SERIALIZER.write(buffer,
+                            new SetClientPlayerDataPacket("cobblemon:general", false, true, false,
                                     true, false, UUID.randomUUID(), null, null));
 
                     player.sendPluginMessage("cobblemon:set_client_playerdata", buffer.read(NetworkBuffer.RAW_BYTES));
@@ -82,8 +83,8 @@ public class Cobblemon {
 
             NetworkBuffer buffer = NetworkBuffer.resizableBuffer(0);
 
-            SyncPacket.SERIALIZER.write(buffer,
-                    new SyncPacket("cobblemon:general", false, false, false,
+            SetClientPlayerDataPacket.SERIALIZER.write(buffer,
+                    new SetClientPlayerDataPacket("cobblemon:general", false, false, false,
                             false, false, null, null, null));
 
             player.sendPluginMessage("cobblemon:set_client_playerdata", buffer.read(NetworkBuffer.RAW_BYTES));
@@ -98,13 +99,11 @@ public class Cobblemon {
                     .addEntity("seel", "Seel", "water")
                     .addEntity("jynx", "Jynx", "dark");
 
-            listBuffer.write(NetworkBuffer.VAR_INT, builder.getEntities().size()); // count of pokemon to add
+            listBuffer.write(NetworkBuffer.VAR_INT, builder.getEntities().size()); // length of pokemon to add
             builder.build(listBuffer);
 
             byte[] bytes = listBuffer.read(NetworkBuffer.RAW_BYTES);
-            buffer.write(NetworkBuffer.INT, bytes.length);
-            buffer.write(NetworkBuffer.RAW_BYTES, bytes);
-
+            SpeciesSyncPacket.SERIALIZER.write(buffer, new SpeciesSyncPacket(bytes.length, bytes));
             player.sendPluginMessage("cobblemon:species_sync", buffer.read(NetworkBuffer.RAW_BYTES));
 
             Main.dataMap.put(player.getUuid(), new PlayerData(player));
