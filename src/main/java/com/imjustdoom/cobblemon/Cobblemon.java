@@ -4,6 +4,7 @@ import com.imjustdoom.Main;
 import com.imjustdoom.PlayerData;
 import com.imjustdoom.packet.in.SelectStarterPacket;
 import com.imjustdoom.packet.out.SyncPacket;
+import com.imjustdoom.packet.out.party.SetPartyCobblemonPacket;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.MinecraftServer;
@@ -19,7 +20,6 @@ public class Cobblemon {
 
     public void start() {
         MinecraftServer.getGlobalEventHandler().addListener(PlayerPacketEvent.class, playerPacketEvent -> {
-
             Player player = playerPacketEvent.getPlayer();
 
             if (playerPacketEvent.getPacket() instanceof ClientPluginMessagePacket) {
@@ -27,6 +27,16 @@ public class Cobblemon {
                 System.out.println("data - " + new String((((ClientPluginMessagePacket) playerPacketEvent.getPacket()).data())));
 
                 if (((ClientPluginMessagePacket) playerPacketEvent.getPacket()).channel().equals("cobblemon:request_starter_screen")) {
+
+                    // TODO: Branches. Already selected, cannot choose or send the options. Store player data to know
+
+                    if (false) {// Already selected a starter
+                        player.sendMessage(Component.translatable("cobblemon.ui.starter.alreadyselected"));
+                        return;
+                    } else if (false) {// Cannot choose
+                        player.sendMessage(Component.translatable("cobblemon.ui.starter.cannotchoose"));
+                        return;
+                    }
 
                     NetworkBuffer buffer = NetworkBuffer.resizableBuffer(0);
 
@@ -55,8 +65,7 @@ public class Cobblemon {
                     player.sendPluginMessage("cobblemon:set_client_playerdata", buffer.read(NetworkBuffer.RAW_BYTES));
 
                     buffer = NetworkBuffer.resizableBuffer(16);
-                    buffer.write(NetworkBuffer.UUID, player.getUuid()); // player uuid?
-                    buffer.write(NetworkBuffer.SHORT, (short) 0);
+                    SetPartyCobblemonPacket.SERIALIZER.write(buffer, new SetPartyCobblemonPacket(player.getUuid(), (short) 0));
                     player.sendPluginMessage("cobblemon:set_party_pokemon", buffer.read(NetworkBuffer.RAW_BYTES));
 
 
