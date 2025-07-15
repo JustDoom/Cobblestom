@@ -1,0 +1,5 @@
+[versions]
+com-github-lowercasebtw-minestom-v1-v21-v1 = "f0c84ad98d"
+
+[libraries]
+com-github-lowercasebtw-minestom-v1-v21-v1 = { module = "com.github.lowercasebtw:minestom_1-21-1", version.ref = "com-github-lowercasebtw-minestom-v1-v21-v1" }
