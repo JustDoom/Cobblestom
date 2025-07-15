@@ -7,10 +7,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public record SyncPacket(String id, boolean incremental, boolean promptStarter, boolean starterLocked, boolean starterSelected,
-                         boolean showChallengeLabel, @Nullable UUID starterUUID, @Nullable Boolean resetStarters,
-                         @Nullable NamespaceID battleTheme) {
-
+public record SyncPacket(String id, boolean incremental, boolean promptStarter, boolean starterLocked,
+                         boolean starterSelected, boolean showChallengeLabel, @Nullable UUID starterUUID,
+                         @Nullable Boolean resetStarters, @Nullable NamespaceID battleTheme) {
     public static final NetworkBuffer.Type<SyncPacket> SERIALIZER = NetworkBufferTemplate.template(
             NetworkBuffer.STRING, SyncPacket::id,
             NetworkBuffer.BOOLEAN, SyncPacket::incremental,

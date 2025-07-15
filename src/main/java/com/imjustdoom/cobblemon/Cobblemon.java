@@ -32,19 +32,9 @@ public class Cobblemon {
 
                     buffer.write(NetworkBuffer.INT, 3); //category size
 
-                    addRegion(buffer, "Kanto", 2); // pokemon count in category
-
-                    addStarter(buffer, "charmander"); // must be registered in the SyncCommand class
-                    addStarter(buffer, "pikachu");
-
-                    addRegion(buffer, "Kalos", 2);
-
-                    addStarter(buffer, "seel");
-                    addStarter(buffer, "jynx");
-
-                    addRegion(buffer, "test", 1);
-
-                    addStarter(buffer, "mew");
+                    addRegion(buffer, "Kanto", "charmander", "pikachu");
+                    addRegion(buffer, "Kalos", "seel", "jynx");
+                    addRegion(buffer, "test", "mew");
 
                     player.sendPluginMessage("cobblemon:open_starter", buffer.read(NetworkBuffer.RAW_BYTES));
                 } else if (((ClientPluginMessagePacket) playerPacketEvent.getPacket()).channel().equals("cobblemon:select_starter")) {
@@ -77,7 +67,9 @@ public class Cobblemon {
             }
         }).addListener(PlayerSpawnEvent.class, playerLoginEvent -> {
             Player player = playerLoginEvent.getPlayer();
-            if (!playerLoginEvent.isFirstSpawn()) return;
+            if (!playerLoginEvent.isFirstSpawn()) {
+                return;
+            }
 
             NetworkBuffer buffer = NetworkBuffer.resizableBuffer(0);
 
@@ -89,13 +81,16 @@ public class Cobblemon {
 
             buffer = NetworkBuffer.resizableBuffer(1024);
             NetworkBuffer listBuffer = NetworkBuffer.resizableBuffer(512);
-            listBuffer.write(NetworkBuffer.VAR_INT, 5); // count of pokemon to add
 
-            addEntity(listBuffer, "charmander", "Charmander", "fire");
-            addEntity(listBuffer, "pikachu", "Pikachu", "electric");
-            addEntity(listBuffer, "mew", "Mew", "psychic");
-            addEntity(listBuffer, "seel", "Seel", "water");
-            addEntity(listBuffer, "jynx", "Jynx", "dark");
+            CobblemonEntitiesBuilder builder = new CobblemonEntitiesBuilder()
+                    .addEntity("charmander", "Charmander", "fire")
+                    .addEntity("pikachu", "Pikachu", "electric")
+                    .addEntity("mew", "Mew", "psychic")
+                    .addEntity("seel", "Seel", "water")
+                    .addEntity("jynx", "Jynx", "dark");
+
+            listBuffer.write(NetworkBuffer.VAR_INT, builder.getEntities().size()); // count of pokemon to add
+            builder.build(listBuffer);
 
             byte[] bytes = listBuffer.read(NetworkBuffer.RAW_BYTES);
             buffer.write(NetworkBuffer.INT, bytes.length);
@@ -109,56 +104,31 @@ public class Cobblemon {
         });
     }
 
+    /**
+     * Adds a new started to the last added region. For internal addRegion method use
+     *
+     * @param buffer
+     * @param id     Cobblemon id
+     */
     private void addStarter(NetworkBuffer buffer, String id) {
         buffer.write(NetworkBuffer.STRING, "cobblemon:" + id); //cobblemon.species.charmander
         buffer.write(NetworkBuffer.BYTE, (byte) 0); // aspects size?
     }
 
-    private void addRegion(NetworkBuffer buffer, String name, int size) {
+    /**
+     * Adds a new region
+     *
+     * @param buffer
+     * @param name      Name/id of the region
+     * @param cobblemon String list of cobblemon id's to add to the region
+     */
+    private void addRegion(NetworkBuffer buffer, String name, String... cobblemon) {
         buffer.write(NetworkBuffer.STRING, name); // cat name
         buffer.write(NetworkBuffer.STRING, "cobblemon.starterselection.category." + name.toLowerCase()); // display name
-        buffer.write(NetworkBuffer.INT, size); // size of list?
-    }
+        buffer.write(NetworkBuffer.INT, cobblemon.length); // size of list?
 
-    public static void addEntity(NetworkBuffer buffer, String id, String name, String type) {
-        buffer.write(NetworkBuffer.STRING, "cobblemon:" + id); // species i think
-
-        buffer.write(NetworkBuffer.BOOLEAN, true);
-        buffer.write(NetworkBuffer.STRING, name);
-        buffer.write(NetworkBuffer.INT, 5);
-
-        // base stats map aaaa
-        buffer.write(NetworkBuffer.VAR_INT, 0);
-
-        buffer.write(NetworkBuffer.STRING, type);
-
-        buffer.write(NetworkBuffer.BOOLEAN, false);
-
-        buffer.write(NetworkBuffer.STRING, "medium_slow");
-        buffer.write(NetworkBuffer.FLOAT, 6.0f);
-        buffer.write(NetworkBuffer.FLOAT, 85.0f);
-        buffer.write(NetworkBuffer.FLOAT, 0.7f);
-        buffer.write(NetworkBuffer.FLOAT, 1.0f);
-
-        // dimesnions
-        buffer.write(NetworkBuffer.FLOAT, 0.7f);
-        buffer.write(NetworkBuffer.FLOAT, 1.1f);
-        buffer.write(NetworkBuffer.BOOLEAN, false);
-
-        buffer.write(NetworkBuffer.BYTE, (byte) 0); //
-
-        buffer.write(NetworkBuffer.VAR_INT, 1);
-        buffer.write(NetworkBuffer.STRING, "cobblemon.species." + id + ".desc");
-
-        buffer.write(NetworkBuffer.VAR_INT, 0);
-
-        buffer.write(NetworkBuffer.STRING, "cobblemon:battle.pvw.default");
-
-        buffer.write(NetworkBuffer.VAR_INT, 0);
-
-        buffer.write(NetworkBuffer.BOOLEAN, false);
-
-        buffer.write(NetworkBuffer.INT, 0);
-        buffer.write(NetworkBuffer.VAR_INT, 0);
+        for (String id : cobblemon) {
+            addStarter(buffer, id);
+        }
     }
 }

@@ -7,7 +7,6 @@ import net.minestom.server.network.NetworkBuffer;
 import net.minestom.server.network.packet.client.common.ClientPluginMessagePacket;
 
 public class CobblemonPacketListener {
-
     public void init() {
         MinecraftServer.getGlobalEventHandler().addListener(PlayerPacketEvent.class, playerPacketEvent -> {
             if (!(playerPacketEvent.getPacket() instanceof ClientPluginMessagePacket)) {

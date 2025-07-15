@@ -15,12 +15,16 @@ import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.ItemEntity;
 import net.minestom.server.entity.Player;
+import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.item.ItemDropEvent;
 import net.minestom.server.event.item.PickupItemEvent;
 import net.minestom.server.event.player.AsyncPlayerConfigurationEvent;
 import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.event.server.ServerListPingEvent;
-import net.minestom.server.instance.*;
+import net.minestom.server.instance.Instance;
+import net.minestom.server.instance.InstanceContainer;
+import net.minestom.server.instance.InstanceManager;
+import net.minestom.server.instance.LightingChunk;
 import net.minestom.server.instance.block.Block;
 import net.minestom.server.item.ItemStack;
 import net.minestom.server.item.Material;
@@ -29,10 +33,7 @@ import net.minestom.server.utils.identity.NamedAndIdentified;
 import net.minestom.server.utils.time.TimeUnit;
 import net.minestom.server.world.DimensionType;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class Main {
     public static Map<UUID, PlayerData> dataMap = new HashMap<>();
@@ -47,6 +48,7 @@ public class Main {
         CommandManager commandManager = MinecraftServer.getCommandManager();
         commandManager.register(new SaveCommand());
 
+        // Item dropping
         MinecraftServer.getGlobalEventHandler().addListener(ItemDropEvent.class, event -> {
             ItemStack item = event.getItemStack();
 
@@ -56,6 +58,7 @@ public class Main {
             itemEntity.setVelocity(event.getPlayer().getPosition().direction().mul(6));
         });
 
+        // Server list ping
         MinecraftServer.getGlobalEventHandler().addListener(ServerListPingEvent.class, event -> {
             ResponseData responseData = event.getResponseData();
             responseData.addEntry(NamedAndIdentified.named("The first line is separated from the others"));
@@ -89,11 +92,11 @@ public class Main {
         instanceContainer.setGenerator(unit -> unit.modifier().fillHeight(0, 40, Block.STONE));
         instanceContainer.setChunkSupplier(LightingChunk::new);
 
-        var eventHandler = MinecraftServer.getGlobalEventHandler();
+        GlobalEventHandler eventHandler = MinecraftServer.getGlobalEventHandler();
         eventHandler.addListener(AsyncPlayerConfigurationEvent.class, event -> {
             final Player player = event.getPlayer();
 
-            var instances = MinecraftServer.getInstanceManager().getInstances();
+            Set<Instance> instances = MinecraftServer.getInstanceManager().getInstances();
             Instance instance = instances.stream().skip(new Random().nextInt(instances.size())).findFirst().orElse(null);
             event.setSpawningInstance(instance);
             player.setRespawnPoint(new Pos(0, 40f, 0));
@@ -108,6 +111,7 @@ public class Main {
                 player.getInventory().addItemStack(event.getItemStack());
             }
 
+            // Test custom sounds
             event.getInstance().playSound(Sound.sound(Key.key("cobblemon:poke_ball.send_out"), Sound.Source.NEUTRAL, 1, 1));
         });
 
