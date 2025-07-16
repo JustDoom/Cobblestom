@@ -1,1 +1,1 @@
-rootProject.name = "MinestomTest"
+rootProject.name = "Cobblestom"

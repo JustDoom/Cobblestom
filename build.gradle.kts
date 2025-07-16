@@ -20,7 +20,7 @@ dependencies {
 
 group = "com.imjustdoom"
 version = "1.0-SNAPSHOT"
-description = "MinestomTest"
+description = "Cobblestom"
 java.sourceCompatibility = JavaVersion.VERSION_21
 
 publishing {

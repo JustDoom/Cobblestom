@@ -20,7 +20,6 @@ public class PlayerData {
         return this.player;
     }
 
-    // TODO: Maybe make a player wrapper and move this there
     public <T extends Packet> void write(T packet) {
         NetworkBuffer buffer = NetworkBuffer.resizableBuffer(16);
 
