@@ -2,13 +2,10 @@ package com.imjustdoom.cobblemon;
 
 import com.imjustdoom.PlayerData;
 import com.imjustdoom.packet.CobblemonPacketListener;
-import com.imjustdoom.packet.out.SetClientPlayerDataPacket;
 import com.imjustdoom.packet.out.SpeciesSyncPacket;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.minestom.server.MinecraftServer;
 import net.minestom.server.entity.Player;
-import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.network.NetworkBuffer;
 
 import java.util.HashMap;
@@ -25,31 +22,30 @@ public class Cobblemon {
 
     public void start() {
         this.packetListener.init();
+    }
 
-        MinecraftServer.getGlobalEventHandler().addListener(PlayerSpawnEvent.class, playerLoginEvent -> {
-            if (!playerLoginEvent.isFirstSpawn()) {
-                return;
-            }
+    /**
+     * Syncs a new players into the system. Without it they can not do any cobblemon related things
+     * @param player
+     */
+    public void syncPlayer(Player player) {
+        PlayerData playerData = new PlayerData(player);
+        playerData.write(playerData.createPacket("cobblemon:general", false));
 
-            Player player = playerLoginEvent.getPlayer();
-            PlayerData playerData = new PlayerData(player);
-            playerData.write(new SetClientPlayerDataPacket("cobblemon:general", false, false, false, false, false, null, null, null));
+        // TODO: Write proper packet serializers for these
+        NetworkBuffer listBuffer = NetworkBuffer.resizableBuffer(512);
 
-            // TODO: Write proper packet serializers for these
-            NetworkBuffer listBuffer = NetworkBuffer.resizableBuffer(512);
+        CobblemonEntitiesBuilder builder = new CobblemonEntitiesBuilder().addEntity("charmander", "Charmander", "fire").addEntity("pikachu", "Pikachu", "electric").addEntity("mew", "Mew", "psychic").addEntity("seel", "Seel", "water").addEntity("jynx", "Jynx", "dark");
 
-            CobblemonEntitiesBuilder builder = new CobblemonEntitiesBuilder().addEntity("charmander", "Charmander", "fire").addEntity("pikachu", "Pikachu", "electric").addEntity("mew", "Mew", "psychic").addEntity("seel", "Seel", "water").addEntity("jynx", "Jynx", "dark");
+        listBuffer.write(NetworkBuffer.VAR_INT, builder.getEntities().size()); // length of pokemon to add
+        builder.build(listBuffer);
 
-            listBuffer.write(NetworkBuffer.VAR_INT, builder.getEntities().size()); // length of pokemon to add
-            builder.build(listBuffer);
+        byte[] bytes = listBuffer.read(NetworkBuffer.RAW_BYTES);
+        playerData.write(new SpeciesSyncPacket(bytes.length, bytes));
 
-            byte[] bytes = listBuffer.read(NetworkBuffer.RAW_BYTES);
-            playerData.write(new SpeciesSyncPacket(bytes.length, bytes));
+        this.playerDataMap.put(player.getUuid(), playerData);
 
-            this.playerDataMap.put(player.getUuid(), playerData);
-
-            player.sendMessage(Component.text("Successfully synced with Cobblemon!", NamedTextColor.GREEN));
-        });
+        player.sendMessage(Component.text("Successfully synced with Cobblemon!", NamedTextColor.GREEN));
     }
 
     public CobblemonPacketListener getPacketListener() {
