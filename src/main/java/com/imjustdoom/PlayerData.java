@@ -14,13 +14,13 @@ import java.util.UUID;
 public class PlayerData {
     private final Player player;
 
-    public boolean starterPrompted = false;
+    public boolean starterPrompted = true;
     public boolean starterLocked = false;
     public boolean startedSelected = false;
-    public boolean showChallengeLabel = false;
+    public boolean showChallengeLabel = true;
     public UUID starterUuid;
     public boolean resetStarters = false;
-    public @Nullable NamespaceID battleTheme;
+    public @Nullable NamespaceID battleTheme = NamespaceID.from("cobblemon", "battle.pvp.default");
 
     public PlayerData(Player player) {
         this.player = player;

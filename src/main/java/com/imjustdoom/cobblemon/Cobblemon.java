@@ -3,6 +3,8 @@ package com.imjustdoom.cobblemon;
 import com.imjustdoom.PlayerData;
 import com.imjustdoom.packet.CobblemonPacketListener;
 import com.imjustdoom.packet.out.SpeciesSyncPacket;
+import com.imjustdoom.packet.out.party.InitialisePartyPacket;
+import com.imjustdoom.packet.out.party.SetPartyReferencePacket;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.entity.Player;
@@ -14,6 +16,7 @@ import java.util.UUID;
 
 public class Cobblemon {
     private final CobblemonPacketListener packetListener = new CobblemonPacketListener();
+    private final Map<UUID, PartyStore> playerParties = new HashMap<>();
     private final Map<UUID, PlayerData> playerDataMap = new HashMap<>();
 
     public Cobblemon() {
@@ -30,7 +33,14 @@ public class Cobblemon {
      */
     public void syncPlayer(Player player) {
         PlayerData playerData = new PlayerData(player);
+        PartyStore store = new PartyStore(UUID.randomUUID());
+        store.getMons().add("charmander");
+
+        playerData.write(new InitialisePartyPacket(false, store.getUuid(), (byte) 6));
+        playerData.write(new SetPartyReferencePacket(store.getUuid()));
+
         playerData.write(playerData.createPacket("cobblemon:general", false));
+//        playerData.write(playerData.createPacket("cobblemon:pokedex", false)); // TODO Aaaaaaaaa
 
         // TODO: Write proper packet serializers for these
         NetworkBuffer listBuffer = NetworkBuffer.resizableBuffer(512);

@@ -7,7 +7,9 @@ import com.imjustdoom.packet.in.starter.RequestStarterScreenPacket;
 import com.imjustdoom.packet.in.starter.SelectStarterPacket;
 import com.imjustdoom.packet.out.SetClientPlayerDataPacket;
 import com.imjustdoom.packet.out.SpeciesSyncPacket;
+import com.imjustdoom.packet.out.party.InitialisePartyPacket;
 import com.imjustdoom.packet.out.party.SetPartyCobblemonPacket;
+import com.imjustdoom.packet.out.party.SetPartyReferencePacket;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.event.player.PlayerPacketEvent;
 import net.minestom.server.network.NetworkBuffer;
@@ -30,7 +32,9 @@ public class CobblemonPacketListener {
         this.toServerPackets.put("request_starter_screen", RequestStarterScreenPacket.class);
         this.toServerPackets.put("select_starter", SelectStarterPacket.class);
 
+        this.toClientPackets.put(InitialisePartyPacket.class, "cobblemon:initialize_party");
         this.toClientPackets.put(SetPartyCobblemonPacket.class, "cobblemon:set_party_pokemon");
+        this.toClientPackets.put(SetPartyReferencePacket.class, "cobblemon:set_party_reference");
         this.toClientPackets.put(SetClientPlayerDataPacket.class, "cobblemon:set_client_playerdata");
         this.toClientPackets.put(SpeciesSyncPacket.class, "cobblemon:species_sync");
 
