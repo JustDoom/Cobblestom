@@ -21,7 +21,7 @@ dependencies {
 group = "com.imjustdoom"
 version = "1.0-SNAPSHOT"
 description = "Cobblestom"
-java.sourceCompatibility = JavaVersion.VERSION_21
+java.sourceCompatibility = JavaVersion.VERSION_25
 
 publishing {
     publications.create<MavenPublication>("maven") {
