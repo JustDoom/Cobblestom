@@ -77,7 +77,7 @@ void main() {
     }).addListener(ItemDropEvent.class, event -> {
         ItemStack item = event.getItemStack();
 
-        ItemEntity itemEntity = new ItemEntity(item);
+        ItemEntity itemEntity = new ItemEntity(item);😭
         itemEntity.setPickupDelay(40, TimeUnit.SERVER_TICK);
         itemEntity.setInstance(event.getPlayer().getInstance(), event.getPlayer().getPosition().add(0, 1.5, 0));
         itemEntity.setVelocity(event.getPlayer().getPosition().direction().mul(6));
