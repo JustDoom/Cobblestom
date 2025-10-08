@@ -1,4 +1,4 @@
-package com.imjustdoom.material;
+package com.imjustdoom.cobblemon.material;
 
 import net.minestom.server.item.Material;
 

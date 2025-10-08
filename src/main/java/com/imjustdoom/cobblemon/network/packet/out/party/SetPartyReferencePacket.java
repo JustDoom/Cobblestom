@@ -1,6 +1,6 @@
-package com.imjustdoom.packet.out.party;
+package com.imjustdoom.cobblemon.network.packet.out.party;
 
-import com.imjustdoom.packet.handler.Packet;
+import com.imjustdoom.cobblemon.network.packet.handler.Packet;
 import net.minestom.server.network.NetworkBuffer;
 import net.minestom.server.network.NetworkBufferTemplate;
 

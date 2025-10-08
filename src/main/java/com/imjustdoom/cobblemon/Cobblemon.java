@@ -1,10 +1,11 @@
 package com.imjustdoom.cobblemon;
 
-import com.imjustdoom.PlayerData;
-import com.imjustdoom.packet.CobblemonPacketListener;
-import com.imjustdoom.packet.out.SpeciesSyncPacket;
-import com.imjustdoom.packet.out.party.InitialisePartyPacket;
-import com.imjustdoom.packet.out.party.SetPartyReferencePacket;
+import com.imjustdoom.cobblemon.data.PartyStore;
+import com.imjustdoom.cobblemon.data.PlayerData;
+import com.imjustdoom.cobblemon.network.CobblemonPacketListener;
+import com.imjustdoom.cobblemon.network.packet.out.SpeciesSyncPacket;
+import com.imjustdoom.cobblemon.network.packet.out.party.InitialisePartyPacket;
+import com.imjustdoom.cobblemon.network.packet.out.party.SetPartyReferencePacket;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.entity.Player;

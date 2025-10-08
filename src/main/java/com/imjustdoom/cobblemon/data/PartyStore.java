@@ -1,4 +1,4 @@
-package com.imjustdoom.cobblemon;
+package com.imjustdoom.cobblemon.data;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.imjustdoom.packet.in.starter;
+package com.imjustdoom.cobblemon.network.packet.in.starter;
 
-import com.imjustdoom.PlayerData;
-import com.imjustdoom.packet.handler.PacketHandler;
+import com.imjustdoom.cobblemon.data.PlayerData;
+import com.imjustdoom.cobblemon.network.packet.handler.PacketHandler;
 import net.kyori.adventure.text.Component;
 import net.minestom.server.network.NetworkBuffer;
 import net.minestom.server.network.NetworkBufferTemplate;

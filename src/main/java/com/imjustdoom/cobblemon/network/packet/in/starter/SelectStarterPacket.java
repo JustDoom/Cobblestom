@@ -1,9 +1,9 @@
-package com.imjustdoom.packet.in.starter;
+package com.imjustdoom.cobblemon.network.packet.in.starter;
 
-import com.imjustdoom.PlayerData;
-import com.imjustdoom.packet.handler.PacketHandler;
-import com.imjustdoom.packet.out.party.InitialisePartyPacket;
-import com.imjustdoom.packet.out.party.SetPartyCobblemonPacket;
+import com.imjustdoom.cobblemon.data.PlayerData;
+import com.imjustdoom.cobblemon.network.packet.handler.PacketHandler;
+import com.imjustdoom.cobblemon.network.packet.out.party.InitialisePartyPacket;
+import com.imjustdoom.cobblemon.network.packet.out.party.SetPartyCobblemonPacket;
 import net.minestom.server.network.NetworkBuffer;
 import net.minestom.server.network.NetworkBufferTemplate;
 

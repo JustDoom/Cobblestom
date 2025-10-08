@@ -1,15 +1,15 @@
-package com.imjustdoom.packet;
+package com.imjustdoom.cobblemon.network;
 
 import com.imjustdoom.cobblemon.Cobblemon;
-import com.imjustdoom.packet.handler.Packet;
-import com.imjustdoom.packet.handler.PacketHandler;
-import com.imjustdoom.packet.in.starter.RequestStarterScreenPacket;
-import com.imjustdoom.packet.in.starter.SelectStarterPacket;
-import com.imjustdoom.packet.out.SetClientPlayerDataPacket;
-import com.imjustdoom.packet.out.SpeciesSyncPacket;
-import com.imjustdoom.packet.out.party.InitialisePartyPacket;
-import com.imjustdoom.packet.out.party.SetPartyCobblemonPacket;
-import com.imjustdoom.packet.out.party.SetPartyReferencePacket;
+import com.imjustdoom.cobblemon.network.packet.handler.Packet;
+import com.imjustdoom.cobblemon.network.packet.handler.PacketHandler;
+import com.imjustdoom.cobblemon.network.packet.in.starter.RequestStarterScreenPacket;
+import com.imjustdoom.cobblemon.network.packet.in.starter.SelectStarterPacket;
+import com.imjustdoom.cobblemon.network.packet.out.SetClientPlayerDataPacket;
+import com.imjustdoom.cobblemon.network.packet.out.SpeciesSyncPacket;
+import com.imjustdoom.cobblemon.network.packet.out.party.InitialisePartyPacket;
+import com.imjustdoom.cobblemon.network.packet.out.party.SetPartyCobblemonPacket;
+import com.imjustdoom.cobblemon.network.packet.out.party.SetPartyReferencePacket;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.event.player.PlayerPacketEvent;
 import net.minestom.server.network.NetworkBuffer;

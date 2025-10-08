@@ -1,8 +1,8 @@
-package com.imjustdoom;
+package com.imjustdoom.cobblemon.data;
 
 import com.imjustdoom.cobblemon.Cobblemon;
-import com.imjustdoom.packet.handler.Packet;
-import com.imjustdoom.packet.out.SetClientPlayerDataPacket;
+import com.imjustdoom.cobblemon.network.packet.handler.Packet;
+import com.imjustdoom.cobblemon.network.packet.out.SetClientPlayerDataPacket;
 import net.minestom.server.entity.Player;
 import net.minestom.server.network.NetworkBuffer;
 import net.minestom.server.utils.NamespaceID;

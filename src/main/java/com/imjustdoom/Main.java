@@ -1,6 +1,6 @@
 import com.imjustdoom.SaveCommand;
 import com.imjustdoom.cobblemon.Cobblemon;
-import com.imjustdoom.material.CobblemonMaterials;
+import com.imjustdoom.cobblemon.material.CobblemonMaterials;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
